@@ -127,9 +127,10 @@ function getJSONData() {
 function customizeToolbar(toolbar) {
   // get all tabs
   var tabs = toolbar.getTabs(); 
-   console.log(tabs);
-   console.log(drop(1)(tabs));
-   return drop(1)(tabs);
+   toolbar.getTabs = function() {
+    return drop(1)(tabs);
+   }
+ 
 }
 
 export class App extends React.PureComponent {
