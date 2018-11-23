@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { drop } from 'lodash/fp';
 import * as WebDataRocksReact from './webdatarocks.react';
 import zh from './zh.json';
 
@@ -123,6 +123,15 @@ function getJSONData() {
   ];
 }
 
+
+function customizeToolbar(toolbar) {
+  // get all tabs
+  var tabs = toolbar.getTabs(); 
+   console.log(tabs);
+   console.log(drop(1)(tabs));
+   return drop(1)(tabs);
+}
+
 export class App extends React.PureComponent {
 
   render() {
@@ -132,6 +141,7 @@ export class App extends React.PureComponent {
       <div>
         <WebDataRocksReact.Pivot
           toolbar={true}
+          beforetoolbarcreated={customizeToolbar}
           report={{
             "dataSource": { "data": getJSONData() },
             dataSource: {
